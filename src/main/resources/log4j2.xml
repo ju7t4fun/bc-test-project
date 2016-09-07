@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="ElvesBot" packages="">
+    <Properties>
+        <Property name="size">50 MB</Property>
+        <Property name="maxf">20</Property>
+        <Property name="level">debug</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %C{1}:%L{1} %m%n"/>
+        </Console>
+
+        <RollingFile name="FileLog" fileName="logs/Log.log"
+                     filePattern="logs/$${date:yyyy-MM}/Log-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${size}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${maxf}" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="WARN" >
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+        <Logger name="name.just4fun" level="${level}" additivity="false">
+            <AppenderRef ref="FileLog" />
+        </Logger>
+    </Loggers>
+</Configuration>

@@ -24,6 +24,9 @@ public class BookService {
     public List<Book> find(String token){
         return repository.findByTitleOrAuthor(token, token);
     }
+    public List<Book> findAll(){
+        return repository.findAll();
+    }
     public void save(Book book){
         repository.save(book);
     }
